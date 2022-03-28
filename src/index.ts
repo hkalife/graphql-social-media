@@ -1,3 +1,20 @@
-const age: number = 33;
+import { ApolloServer } from 'apollo-server';
+import { typeDefs } from './schema';
+import { Query } from './resolvers';
 
-console.log(age);
+const resolvers = {
+  Query: {
+    hello: () => 'World!',
+  },
+};
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers: {
+    Query,
+  },
+});
+
+server.listen().then(({ url }) => {
+  console.log(`Server ready on ${url}`);
+});
